@@ -59,7 +59,8 @@ def main():
         # Only take path from root_folder
         source_path = file[file.index(root_folder) - 1:]
         for dep in deps:
-            if dep in ruby_files:  # Internal dependency
+            # Internal dependency
+            if os.path.basename(dep) in list(map(os.path.basename, ruby_files)):
                 # -1 to take the leading slash "/"
                 dep_path = dep[dep.index(root_folder) - 1:]
                 internal_deps_file.write(

@@ -21,6 +21,14 @@ class MyTest(unittest.TestCase):
 
         ruby_files = parse.get_ruby_files_from_list(['test.html', 'test.java'])
         self.assertEqual(len(ruby_files), 0)
+
+    def test_dependency_keyword(self):
+        self.assertTrue(parse.RegexPattern.dependency_pattern.match('require "test.rb"'))
+        self.assertTrue(parse.RegexPattern.dependency_pattern.match('   require "test.rb"'))
+        self.assertTrue(parse.RegexPattern.dependency_pattern.match('   require "test.rb" # This is a very important dependency'))
+        self.assertTrue(parse.RegexPattern.dependency_pattern.match('require_relative "./test.rb"'))
+        self.assertFalse(parse.RegexPattern.dependency_pattern.match('# require "test.rb"'))
+        self.assertFalse(parse.RegexPattern.dependency_pattern.match('## require "test.rb"'))
     
 
 if __name__ == '__main__':

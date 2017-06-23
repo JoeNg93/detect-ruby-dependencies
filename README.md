@@ -46,10 +46,3 @@
 As far as I'm concerned, there are several ways to require a dependency in Ruby. This project is not a perfect implementation.
 
 For example, it cannot detect dependencies from **Rails** project (since Rails use another file to automatically import all the deps from Gemfile)
-
-In addition, requiring dependencies of same name within two external sources also confuses the script
-
-```
-require 'webhook/spec'
-require 'test/spec'
-```

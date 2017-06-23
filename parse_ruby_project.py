@@ -67,7 +67,10 @@ def main():
                     ":".join([source_path, dep_path, "require_internal"]))
                 internal_deps_file.write("\n")
             else:  # External depedency
-                dep_path = "/External/" + os.path.basename(dep)
+                # Get the dependency path between ".." in require "..." followed by "/External"
+                dep_path = "/External" + \
+                    dep[dep.index(os.path.dirname(file)) +
+                        len(os.path.dirname(file)):]
                 external_deps_file.write(
                     ":".join([source_path, dep_path, "require_external"]))
                 external_deps_file.write("\n")
